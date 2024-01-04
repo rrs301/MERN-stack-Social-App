@@ -6,6 +6,13 @@
 .pnp.js
 .yarn/install-state.gz
 
+/Server/node_modules
+
+/Server
+
+/app/(auth)
+
+
 # testing
 /coverage
 
