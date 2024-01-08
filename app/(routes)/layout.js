@@ -1,10 +1,24 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SideNav from './_components/SideNav'
 import Header from './_components/Header'
+import GlobalApi from '../_utils/GlobalApi'
+import { useUser } from '@clerk/nextjs'
+import { UserDetailContext } from '../_context/UserDetailContext'
+import Image from 'next/image'
 
 function layout({ children }) {
-  const [toggleSideBar, setToggleSideBar] = useState(true)
+  const [toggleSideBar, setToggleSideBar] = useState(false)
+  const {user}=useUser();
+  const {userDetail,setUserDetail}=useContext(UserDetailContext);
+  useEffect(()=>{
+    user&&getUserDetails();
+  },[user])
+  const getUserDetails=()=>{
+    GlobalApi.getUserByEmail(user.primaryEmailAddress.emailAddress).then(resp=>{
+      setUserDetail(resp.data);
+    })
+  }
   return (
     <div>
 
@@ -29,7 +43,14 @@ function layout({ children }) {
             {children}
           </div>
           {/* Right Most Section of page */}
-          <div className='p-5'>Side Section</div>
+          <div className='p-5'>
+            <Image src='/post.png' width={500} height={300}
+            className='w-full rounded-lg shadow-sm'
+            alt='post'/>
+            <Image src='/post2.jpeg' width={500} height={300}
+            className='w-full rounded-lg shadow-sm mt-5'
+            alt='post'/>
+          </div>
         </div>
 
       </div>

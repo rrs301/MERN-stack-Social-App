@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function Banner() {
@@ -12,7 +13,10 @@ function Banner() {
         <div>
         <h2 className='font-bold text-[29px] '>WELCOME TO SOCIAL PANDA</h2>
         <h2 className=''>Join Community, Create and Share your thought</h2>
-        <Button className="mt-3 bg-blue-500">Get Started</Button>
+       
+        <Link href='/sign-up'>
+           <Button className="mt-3 bg-blue-500">Get Started</Button>
+          </Link>
         </div>
         
     </div>
